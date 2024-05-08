@@ -27,6 +27,8 @@ const (
 	CALL // myFunc(X)
 	// INDEX represents precedence of array index operator.
 	INDEX // array[index]
+	// BIT represents precedence of bit operator.
+	BIT
 )
 
 var precedences = map[token.Type]int{
@@ -40,6 +42,7 @@ var precedences = map[token.Type]int{
 	token.ASTARISK: PRODUCT,
 	token.LPAREN:   CALL,
 	token.LBRACKET: INDEX,
+	token.AND:      BIT,
 }
 
 type (
@@ -90,6 +93,7 @@ func New(l lexer.Lexer) *Parser {
 		token.SLASH:    p.parseInfixExpression,
 		token.EQ:       p.parseInfixExpression,
 		token.NEQ:      p.parseInfixExpression,
+		token.AND:      p.parseInfixExpression,
 		token.LT:       p.parseInfixExpression,
 		token.GT:       p.parseInfixExpression,
 		token.LPAREN:   p.parseCallExpression,
@@ -144,6 +148,7 @@ func (p *Parser) ParseProgram() *ast.Program {
 
 	for !p.curTokenIs(token.EOF) {
 		stmt := p.parseStatement()
+		//lint:ignore SA4023 this is ok
 		if stmt != nil {
 			program.Statements = append(program.Statements, stmt)
 		}
@@ -382,6 +387,7 @@ func (p *Parser) parseBlockStatement() *ast.BlockStatement {
 
 	for !p.curTokenIs(token.RBRACE) && !p.curTokenIs(token.EOF) {
 		stmt := p.parseStatement()
+		//lint:ignore SA4023 this is ok
 		if stmt != nil {
 			block.Statements = append(block.Statements, stmt)
 		}

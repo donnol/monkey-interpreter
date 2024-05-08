@@ -39,6 +39,9 @@ const (
 	// NEQ is a token type for not equality operator.
 	NEQ = "!="
 
+	// bit and
+	AND = "&"
+
 	// COMMA is a token type for commas.
 	COMMA = ","
 	// SEMICOLON is a token type for semicolons.
