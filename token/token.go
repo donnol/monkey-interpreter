@@ -41,6 +41,7 @@ const (
 
 	// bit and
 	AND = "&"
+	OR  = "|"
 
 	// COMMA is a token type for commas.
 	COMMA = ","

@@ -91,6 +91,8 @@ func (l *lexer) NextToken() token.Token {
 		tok = newToken(token.GT, l.ch)
 	case '&':
 		tok = newToken(token.AND, l.ch)
+	case '|':
+		tok = newToken(token.OR, l.ch)
 	case '{':
 		tok = newToken(token.LBRACE, l.ch)
 	case '}':

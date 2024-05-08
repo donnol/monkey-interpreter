@@ -43,6 +43,7 @@ var precedences = map[token.Type]int{
 	token.LPAREN:   CALL,
 	token.LBRACKET: INDEX,
 	token.AND:      BIT,
+	token.OR:       BIT,
 }
 
 type (
@@ -94,6 +95,7 @@ func New(l lexer.Lexer) *Parser {
 		token.EQ:       p.parseInfixExpression,
 		token.NEQ:      p.parseInfixExpression,
 		token.AND:      p.parseInfixExpression,
+		token.OR:       p.parseInfixExpression,
 		token.LT:       p.parseInfixExpression,
 		token.GT:       p.parseInfixExpression,
 		token.LPAREN:   p.parseCallExpression,
